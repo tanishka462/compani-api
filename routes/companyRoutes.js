@@ -21,14 +21,16 @@ router.post("/",async(req,res)=>{
     }
 });
 
-router.get("/",async(req,res)=>{
-    try{
+router.get("/", async (req, res) => {
+    try {
         const companies = await Company.findAll();
+        console.log("Companies fetched:", companies); // debug
         res.json(companies);
-    }
-    catch(error){
-        res.status(500).json({error:error.message});
+    } catch (error) {
+        console.error("Error fetching companies:", error); // full error log
+        res.status(500).json({ error: error.message || "Unknown error" });
     }
 });
+
 
 module.exports = router;
